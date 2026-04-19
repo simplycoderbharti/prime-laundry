@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../pages/home.css"; // Reusing header styles
-import logo from "../assets/new-logo.png";
+import logo from "../assets/logo.png";
 import QuoteModal from "./QuoteModal";
 
 const Navbar = () => {

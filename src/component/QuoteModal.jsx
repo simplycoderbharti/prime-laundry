@@ -66,14 +66,14 @@ const handleForm = (e) => {
     console.log("📤 Sending data:", formData);
 
     emailjs.send(
-      "service_upfrttp",   // ✅ UPDATED SERVICE ID
-      "template_mjj6mws",
+      "service_9dwgpfv",   // ✅ UPDATED SERVICE ID
+      "template_j39n781",   //template  id
       {
         name: formData.name,
         email: formData.email,
         phone: formData.phone
       },
-      "81pPMIuvmvjAPpb_T"
+      "NRqZk4Nff8L_TufdT" //public key
     )
     .then((response) => {
       console.log("✅ Email Sent:", response);
