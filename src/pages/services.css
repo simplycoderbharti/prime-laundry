@@ -1,0 +1,97 @@
+.services-page {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Global Container for the theme */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 5%;
+}
+
+/* HERO */
+.services-hero {
+  position: relative;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(0, 217, 163, 0.2), transparent 50%),
+    linear-gradient(135deg, rgba(11, 14, 26, 0.95) 0%, rgba(11, 14, 26, 0.8) 100%), 
+    url('https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 5% 40px 5%;
+  overflow: hidden;
+}
+
+.services-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 90% 50%, rgba(0, 217, 163, 0.05), transparent 50%);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--secondary);
+}
+
+/* SERVICES GRID */
+.services-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.service-card-v2 {
+  background: white;
+  padding: 45px 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.02);
+  position: relative;
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.card-number {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(0, 217, 163, 0.2);
+  line-height: 1;
+}
+
+.card-icon-v2 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  display: inline-block;
+  padding: 12px;
+  background: rgba(0, 217, 163, 0.08);
+  border-radius: 20px;
+}
+
+.service-card-v2 h4 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--secondary);
+  font-weight: 800;
+}
+
+.service-card-v2 p {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.services-marquee-wrapper {
+  margin-bottom: 100px;
+}

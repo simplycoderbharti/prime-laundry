@@ -1,0 +1,96 @@
+
+      .hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .hero video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        flex-direction: column;
+        animation: fadeIn 1.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(30px);}
+        to {opacity: 1; transform: translateY(0);}
+      }
+
+      .overlay h1 {
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+
+      .overlay p {
+        font-size: 20px;
+        opacity: 0.9;
+      }
+
+      .btn {
+        margin-top: 20px;
+        padding: 12px 30px;
+        background: #fff;
+        color: #000;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        background: #000;
+        color: #fff;
+      }
+
+      .section {
+        padding: 80px 60px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+
+      .card {
+        background: rgba(255,255,255,0.7);
+        backdrop-filter: blur(10px);
+        padding: 25px;
+        border-radius: 15px;
+        transition: 0.4s;
+        cursor: pointer;
+      }
+
+      .card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      }
+
+      .section h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 32px;
+      }
+
+      .about-preview {
+        text-align: center;
+        max-width: 800px;
+        margin: auto;
+        line-height: 1.6;
+      }
+    

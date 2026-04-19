@@ -1,0 +1,248 @@
+.modal-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 14, 26, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  max-width: 480px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 2.5rem;
+  box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 10001;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  padding: 0.5rem;
+  color: rgba(11, 14, 26, 0.4);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  color: #0b0e1a;
+  background: #ffffff;
+  transform: rotate(90deg);
+}
+
+.modal-close-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.modal-content {
+  padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .modal-content {
+    padding: 3rem;
+  }
+}
+
+.modal-header {
+  margin-bottom: 2.5rem;
+}
+
+.modal-icon {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  overflow: visible;
+}
+
+.modal-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Filter to convert logo to Brand Color #00d9a3 */
+  filter: invert(58%) sepia(84%) saturate(2256%) hue-rotate(127deg) brightness(98%) contrast(101%);
+}
+
+.modal-title {
+  font-size: 1.875rem;
+  font-weight: 900;
+  color: #0b0e1a;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .modal-title {
+    font-size: 2.25rem;
+  }
+}
+
+.modal-title span {
+  color: #00d9a3;
+}
+
+.modal-description {
+  color: rgba(11, 14, 26, 0.6);
+  font-weight: 500;
+  line-height: 1.625;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 0.625rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  color: rgba(11, 14, 26, 0.4);
+  margin-bottom: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  background: rgba(0, 217, 163, 0.05);
+  color: #0b0e1a;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(11, 14, 26, 0.3);
+}
+
+.form-input:focus {
+  border-color: #00d9a3;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 217, 163, 0.1);
+}
+
+.form-input.error {
+  border-color: #fca5a5;
+}
+
+.error-message {
+  color: #ef4444;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 0.25rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1.25rem;
+  background: #00d9a3;
+  color: #0b0e1a;
+  font-weight: 900;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 217, 163, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-btn:hover {
+  background: #00b386;
+  transform: translateY(-3px);
+  box-shadow: 0 25px 30px -5px rgba(0, 217, 163, 0.3);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+.success-container {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.success-icon {
+  width: 6rem;
+  height: 6rem;
+  background: rgba(0, 217, 163, 0.1);
+  color: #00d9a3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+}
+
+.success-icon svg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.success-title {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #0b0e1a;
+  margin-bottom: 1rem;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.success-description {
+  color: rgba(11, 14, 26, 0.7);
+  font-weight: 500;
+  padding: 0 1rem;
+  line-height: 1.625;
+  font-size: 1.125rem;
+}
+
+.success-footer {
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: rgba(11, 14, 26, 0.3);
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+.bottom-decor {
+  height: 0.5rem;
+  background: linear-gradient(to right, #00d9a3, #10b981, #00d9a3);
+}
