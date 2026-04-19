@@ -1,6 +1,6 @@
 import React from "react";
 // import "./Marquee.css";
-import "./Marquee.css"
+import "./marquee.css"
 
 export default function Marquee() {
   return (
