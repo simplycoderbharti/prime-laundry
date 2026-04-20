@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./contact.css";
 import { motion } from "framer-motion";
 import Marquee from "../component/Marquee";
+import emailjs from "@emailjs/browser";
+
+// ✅ FontAwesome imports
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone, faEnvelope, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 export default function Contact() {
+
+  // ✅ state
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    message: ""
+  });
+
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const handleBooking = () => {
     const isMobile = /iPhone|Android|iPad|iPod/i.test(navigator.userAgent);
     if (isMobile) {
@@ -16,39 +34,85 @@ export default function Contact() {
     }
   };
 
+  // ✅ validation
+  const validate = () => {
+    let err = {};
+    if (!formData.name.trim()) err.name = "Name required";
+    if (!formData.phone.match(/^\d{10}$/)) err.phone = "Valid number required";
+    if (!formData.address.trim()) err.address = "Address required";
+    if (!formData.message.trim()) err.message = "Message required";
+    return err;
+  };
+
+  // ✅ submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    emailjs.send(
+      "service_9dwgpfv",
+      "template_j39n781",
+      {
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+        message: formData.message
+      },
+      "NRqZk4Nff8L_TufdT"
+    )
+    .then(() => {
+      setIsSubmitted(true);
+
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({ name: "", phone: "", address: "", message: "" });
+      }, 3000);
+    })
+    .catch(() => {
+      alert("Failed ❌");
+    });
+  };
+
+  // ✅ icons updated
   const contactOptions = [
     {
       title: "Call Us",
       detail: "+91 93151 63536",
       sub: "Mon - Sun: 9 AM - 9 PM",
-      icon: "📞",
+      icon: <FontAwesomeIcon icon={faPhone} />,
       action: () => window.location.href = "tel:+919315163536"
     },
     {
       title: "WhatsApp",
       detail: "Chat with Experts",
       sub: "Instant response for bookings",
-      icon: "💬",
+      icon: <FontAwesomeIcon icon={faWhatsapp} />,
       action: handleBooking
     },
     {
       title: "Visit Us",
       detail: "Noida Extension",
       sub: "Gaur City, Uttar Pradesh",
-      icon: "📍",
+      icon: <FontAwesomeIcon icon={faMapMarkerAlt} />,
       action: () => window.open("https://maps.google.com", "_blank")
     },
     {
       title: "Email Us",
       detail: "hello@primelaundry.com",
       sub: "For corporate inquiries",
-      icon: "✉️",
+      icon: <FontAwesomeIcon icon={faEnvelope} />,
       action: () => window.location.href = "mailto:hello@primelaundry.com"
     }
   ];
 
   return (
     <div className="contact-page">
+
       {/* HERO */}
       <section className="contact-hero">
         <div className="contact-overlay"></div>
@@ -59,11 +123,10 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
             className="info-card-large"
           >
-           
             <h1>How Can We <br /> Help You Today?</h1>
             <p className="desc">
               Whether you have a question about our services or want to schedule a pickup, 
-              our team is ready to provide you with the best fabric care experience.
+              our team is ready to help you.
             </p>
           </motion.div>
         </div>
@@ -71,26 +134,10 @@ export default function Contact() {
 
       {/* CONTACT GRID */}
       <section className="contact-info container">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="section-header"
-        >
-          <span className="subtitle">Contact Options</span>
-          <h2>Reach Out to Our Team</h2>
-        </motion.div>
-
         <div className="contact-grid-v2">
           {contactOptions.map((item, index) => (
             <motion.div 
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
               className="contact-card-v2"
               onClick={item.action}
             >
@@ -107,48 +154,55 @@ export default function Contact() {
         <Marquee />
       </div>
 
-      {/* CTA (Unified Design) */}
-      <section className="cta-banner">
-        <div className="overlay">
-          <h1>Ready for the <br /> <span>Prime Experience?</span></h1>
-          <button className="cta-btn" onClick={handleBooking}>Schedule a Pickup Now →</button>
+      {/* FORM */}
+      <section className="contact-form-section form-container">
+        <div className="form-wrapper">
+
+          {!isSubmitted ? (
+            <form className="contact-form" onSubmit={handleSubmit}>
+
+              <div className="form-row">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={formData.name}
+                  onChange={(e)=>setFormData({...formData,name:e.target.value})}
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={(e)=>setFormData({...formData,phone:e.target.value})}
+                />
+              </div>
+
+              {/* ✅ Address added */}
+              <input
+                type="text"
+                placeholder="Your Address"
+                value={formData.address}
+                onChange={(e)=>setFormData({...formData,address:e.target.value})}
+              />
+
+              <textarea
+                placeholder="Your Message..."
+                rows="5"
+                value={formData.message}
+                onChange={(e)=>setFormData({...formData,message:e.target.value})}
+              ></textarea>
+
+              <button type="submit" className="form-btn">
+                Send Message →
+              </button>
+
+            </form>
+          ) : (
+            <h3 style={{textAlign:"center"}}>Message Sent ✅</h3>
+          )}
+
         </div>
       </section>
-      {/* CONTACT FORM */}
-<section className="contact-form-section form-container">
 
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-    className="form-wrapper"
-  >
- <div className="kicker">Get in Touch</div>
-    <h2>Send Us a Message</h2>
-    <p className="form-sub">
-      Have a query or want to book a service? Fill the form and we’ll get back to you.
-    </p>
-
-    <form className="contact-form">
-
-      <div className="form-row">
-        <input type="text" placeholder="Your Name" required />
-        <input type="tel" placeholder="Phone Number" required />
-      </div>
-
-      <textarea placeholder="Your Message..." rows="5" required></textarea>
-
-      <button type="submit" className="form-btn">
-        Send Message →
-      </button>
-
-    </form>
-
-  </motion.div>
-
-</section>
     </div>
-    
   );
 }

@@ -5,7 +5,12 @@ import './QuoteModal.css';
 import emailjs from '@emailjs/browser';
 
 const QuoteModal = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
+const [formData, setFormData] = useState({ 
+  name: '', 
+  email: '', 
+  phone: '',
+  address: '' // ✅ add
+});
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -38,6 +43,7 @@ const QuoteModal = ({ isOpen, onClose }) => {
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.match(/^\S+@\S+\.\S+$/)) newErrors.email = "Invalid email address";
     if (!formData.phone.match(/^\d{10}$/)) newErrors.phone = "Enter a valid 10-digit number";
+    if (!formData.address.trim()) newErrors.address = "Address is required";
     return newErrors;
   };
 
@@ -71,7 +77,8 @@ const handleForm = (e) => {
       {
         name: formData.name,
         email: formData.email,
-        phone: formData.phone
+        phone: formData.phone,
+        address:formData.address
       },
       "NRqZk4Nff8L_TufdT" //public key
     )
@@ -192,6 +199,16 @@ Phone: ${formData.phone}`;
                       />
                       {errors.phone && <p className="error-message">{errors.phone}</p>}
                     </div>
+                    <div className="form-group">
+  <label className="form-label">Address</label>
+  <textarea
+    placeholder="Enter your address"
+    className={`form-input ${errors.address ? 'error' : ''}`}
+    value={formData.address}
+    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+  />
+  {errors.address && <p className="error-message">{errors.address}</p>}
+</div>
 
                     <button
                       type="submit"
